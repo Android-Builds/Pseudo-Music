@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pseudomusic/pages/homepage.dart';
+import 'package:pseudomusic/pages/splashcreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         appBarTheme: AppBarTheme(color: Colors.black),
         popupMenuTheme: PopupMenuThemeData(color: Colors.black),
       ),
-      home: HomePage(),
+      home: SplashScreen(),
     );
   }
 }

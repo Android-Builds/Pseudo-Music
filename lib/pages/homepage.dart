@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pseudomusic/utils/variables.dart';
@@ -8,11 +11,9 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-// StreamSubscription homePeriodicSub;
-
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
-  // static SongModel songmodel;
+  Timer t;
 
   List<Widget> _widgetOptions = <Widget>[
     Container(
@@ -24,18 +25,32 @@ class _HomePageState extends State<HomePage> {
     )
   ];
 
+  updateColors2() {
+    t = Timer.periodic(const Duration(milliseconds: 500), (Timer t) {
+      setState(() {
+        r = ur = Random().nextInt(255);
+        g = ug = Random().nextInt(255);
+        b = ub = Random().nextInt(255);
+      });
+    });
+  }
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
-    // discoController = new StreamController();
-    // discoController.stream.listen((event) {
-    //   if (event) {
-    //     updateParams();
-    //   } else {
-    //     homePeriodicSub.cancel();
-    //   }
-    // });
+  }
+
+  void initState() {
+    super.initState();
+    discoController = new StreamController();
+    discoController.stream.listen((event) {
+      if (event) {
+        updateColors2();
+      } else if (t != null && t.isActive) {
+        t.cancel();
+      }
+    });
   }
 
   @override

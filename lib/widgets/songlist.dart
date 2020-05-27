@@ -29,31 +29,13 @@ class _SongListState extends State<SongList> {
     o = Random().nextDouble();
   }
 
-  updateParams() {
-    periodicSub =
-        Stream.periodic(const Duration(milliseconds: 500)).listen((_) {
-      setState(() {
-        r = ur = Random().nextInt(255);
-        g = ug = Random().nextInt(255);
-        b = ub = Random().nextInt(255);
-        o = uo = Random().nextDouble();
-      });
-    });
-    periodicSub2 =
-        Stream.periodic(const Duration(milliseconds: 500)).listen((_) {
-      setState(() {});
-    });
-    periodicSub.pause();
-    periodicSub2.pause();
-  }
-
   updateColors() {
     t = Timer.periodic(const Duration(milliseconds: 500), (Timer t) {
       setState(() {
-        r = ur = Random().nextInt(255);
-        g = ug = Random().nextInt(255);
-        b = ub = Random().nextInt(255);
-        o = uo = Random().nextDouble();
+        r = Random().nextInt(255);
+        g = Random().nextInt(255);
+        b = Random().nextInt(255);
+        o = Random().nextDouble();
       });
     });
   }
@@ -104,9 +86,9 @@ class _SongListState extends State<SongList> {
                   itemCount: snapshot.data.length + 1,
                   itemBuilder: (context, index) {
                     if (disco2 || randomcol) {
-                      r = ur = Random().nextInt(255);
-                      g = ug = Random().nextInt(255);
-                      b = ub = Random().nextInt(255);
+                      r = Random().nextInt(255);
+                      g = Random().nextInt(255);
+                      b = Random().nextInt(255);
                     }
                     if (index == 0) {
                       return Container(
@@ -125,9 +107,11 @@ class _SongListState extends State<SongList> {
                                 if (disco2) {
                                   disco2 = false;
                                   t1.cancel();
+                                  discoController.add(homepagedisco = !homepagedisco);
                                 }
                                 randomcol = false;
                                 disco = !disco;
+                                discoController.add(homepagedisco = !homepagedisco);
                                 if (t != null && t.isActive) {
                                   t.cancel();
                                 } else {
@@ -141,9 +125,11 @@ class _SongListState extends State<SongList> {
                                 if (disco) {
                                   disco = false;
                                   t.cancel();
+                                  discoController.add(homepagedisco = !homepagedisco);
                                 }
                                 disco2 = !disco2;
                                 randomcol = true;
+                                discoController.add(homepagedisco = !homepagedisco);
                                 if (t1 != null && t1.isActive) {
                                   t1.cancel();
                                 } else {

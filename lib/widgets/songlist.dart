@@ -47,19 +47,6 @@ class _SongListState extends State<SongList> {
     periodicSub2.pause();
   }
 
-  // checkStatus() {
-  //   if (disco && periodicSub.isPaused) {
-  //     periodicSub.resume();
-  //   } else {
-  //     periodicSub.pause();
-  //   }
-  //   if (disco2 && periodicSub2.isPaused) {
-  //     periodicSub2.resume();
-  //   } else {
-  //     periodicSub2.pause();
-  //   }
-  // }
-
   updateColors() {
     t = Timer.periodic(const Duration(milliseconds: 500), (Timer t) {
       setState(() {
@@ -73,8 +60,7 @@ class _SongListState extends State<SongList> {
 
   updateColors2() {
     t1 = Timer.periodic(const Duration(milliseconds: 500), (Timer t) {
-      setState(() {
-      });
+      setState(() {});
     });
   }
 
@@ -90,10 +76,10 @@ class _SongListState extends State<SongList> {
   }
 
   checkParams() {
-    if(disco) {
+    if (disco) {
       updateColors();
     }
-    if(disco2) {
+    if (disco2) {
       updateColors2();
     }
   }
@@ -103,9 +89,6 @@ class _SongListState extends State<SongList> {
     super.initState();
     getColors();
     checkParams();
-    // if (periodicSub == null && periodicSub2 == null) {
-    //   updateParams();
-    // }
   }
 
   @override
@@ -139,43 +122,31 @@ class _SongListState extends State<SongList> {
                             SizedBox(width: 10),
                             IconButton(
                               onPressed: () {
+                                if (disco2) {
+                                  disco2 = false;
+                                  t1.cancel();
+                                }
                                 disco = !disco;
-                                if(t !=null && t.isActive) {
+                                if (t != null && t.isActive) {
                                   t.cancel();
                                 } else {
                                   updateColors();
                                 }
-                                // discoController
-                                //     .add(homepagedisco = !homepagedisco);
-                                // setState(() {
-                                //   if (disco) {
-                                //     periodicSub.resume();
-                                //     randomcol = false;
-                                //   } else {
-                                //     periodicSub.pause();
-                                //   }
-                                // });
                               },
                               icon: Icon(Icons.lightbulb_outline),
                             ),
                             IconButton(
                               onPressed: () {
+                                if (disco) {
+                                  disco = false;
+                                  t.cancel();
+                                }
                                 disco2 = !disco2;
-                                if(t1 !=null && t1.isActive) {
+                                if (t1 != null && t1.isActive) {
                                   t1.cancel();
                                 } else {
                                   updateColors2();
                                 }
-                                // discoController
-                                //     .add(homepagedisco = !homepagedisco);
-                                // setState(() {
-                                //   if (disco2) {
-                                //     periodicSub2.resume();
-                                //     randomcol = true;
-                                //   } else {
-                                //     periodicSub2.pause();
-                                //   }
-                                // });
                               },
                               icon: Icon(Icons.disc_full),
                             )

@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:pseudomusic/utils/variables.dart';
 import 'package:pseudomusic/widgets/songlist.dart';
 
@@ -62,29 +63,64 @@ class _HomePageState extends State<HomePage> {
       systemNavigationBarIconBrightness: Brightness.dark, //bottom bar icons
     ));
     return Scaffold(
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        elevation: 0.0,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.music_note),
-            title: Text('Songs'),
+      body: Row(
+        children: [
+          NavigationRail(
+            destinations: <NavigationRailDestination>[
+              NavigationRailDestination(
+                icon: Icon(Ionicons.ios_musical_note),
+                selectedIcon: Icon(Ionicons.ios_musical_note),
+                label: Text('Songs'),
+              ),
+              NavigationRailDestination(
+                icon: Icon(MaterialCommunityIcons.playlist_music_outline),
+                selectedIcon: Icon(MaterialCommunityIcons.playlist_music),
+                label: Text('Playlists'),
+              ),
+              NavigationRailDestination(
+                icon: Icon(Ionicons.ios_albums),
+                selectedIcon: Icon(Ionicons.ios_albums),
+                label: Text('Albums'),
+              ),
+            ],
+            selectedIndex: _selectedIndex,
+            onDestinationSelected: _onItemTapped,
+            labelType: NavigationRailLabelType.selected,
+            selectedLabelTextStyle: TextStyle(color: Color.fromRGBO(ur, ug, ub, 1)),
+            selectedIconTheme: IconThemeData(color: Color.fromRGBO(ur, ug, ub, 1)),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.playlist_play),
-            title: Text('Playlist'),
+          VerticalDivider(
+            thickness: 1,
+            width: 1,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.album),
-            title: Text('Albums'),
-          ),
+          Expanded(
+            child: _widgetOptions.elementAt(_selectedIndex),
+          )
         ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Color.fromRGBO(ur, ug, ub, 1),
-        onTap: _onItemTapped,
       ),
+      // body: Center(
+      //   child: _widgetOptions.elementAt(_selectedIndex),
+      // ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   elevation: 0.0,
+      //   items: <BottomNavigationBarItem>[
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.music_note),
+      //       title: Text('Songs'),
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.playlist_play),
+      //       title: Text('Playlist'),
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.album),
+      //       title: Text('Albums'),
+      //     ),
+      //   ],
+      //   currentIndex: _selectedIndex,
+      //   selectedItemColor: Color.fromRGBO(ur, ug, ub, 1),
+      //   onTap: _onItemTapped,
+      // ),
     );
   }
 }

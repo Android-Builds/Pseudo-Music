@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pseudomusic/utils/variables.dart';
 
@@ -99,7 +100,11 @@ class _SongListState extends State<SongList> {
                             Text(
                               'All Songs',
                               style: TextStyle(
-                                  fontSize: 35.0, fontWeight: FontWeight.bold),
+                                fontSize: 35.0,
+                                fontWeight: FontWeight.bold,
+                                color:
+                                    Color.fromRGBO(r, g, b, o > 0.7 ? o : 0.7),
+                              ),
                             ),
                             SizedBox(width: 10),
                             IconButton(
@@ -107,42 +112,54 @@ class _SongListState extends State<SongList> {
                                 if (disco2) {
                                   disco2 = false;
                                   t1.cancel();
-                                  discoController.add(homepagedisco = !homepagedisco);
+                                  discoController
+                                      .add(homepagedisco = !homepagedisco);
                                 }
                                 randomcol = false;
                                 disco = !disco;
-                                discoController.add(homepagedisco = !homepagedisco);
+                                discoController
+                                    .add(homepagedisco = !homepagedisco);
                                 if (t != null && t.isActive) {
                                   t.cancel();
                                 } else {
                                   updateColors();
                                 }
                               },
-                              icon: Icon(Icons.lightbulb_outline),
+                              icon: Icon(
+                                Icons.lightbulb_outline,
+                                color:
+                                    Color.fromRGBO(r, g, b, o > 0.7 ? o : 0.7),
+                              ),
                             ),
                             IconButton(
                               onPressed: () {
                                 if (disco) {
                                   disco = false;
                                   t.cancel();
-                                  discoController.add(homepagedisco = !homepagedisco);
+                                  discoController
+                                      .add(homepagedisco = !homepagedisco);
                                 }
                                 disco2 = !disco2;
                                 randomcol = true;
-                                discoController.add(homepagedisco = !homepagedisco);
+                                discoController
+                                    .add(homepagedisco = !homepagedisco);
                                 if (t1 != null && t1.isActive) {
                                   t1.cancel();
                                 } else {
                                   updateColors2();
                                 }
                               },
-                              icon: Icon(Icons.disc_full),
+                              icon: Icon(
+                                FontAwesome.lightbulb_o,
+                                color:
+                                    Color.fromRGBO(r, g, b, o > 0.7 ? o : 0.7),
+                              ),
                             )
                           ],
                         ),
                       );
                     } else {
-                      Color color = Color.fromRGBO(r, g, b, o > 0.7 ? 0.7 : o);
+                      Color color = Color.fromRGBO(r, g, b, o > 0.7 ? o : 0.7);
                       if (darkmode && color.computeLuminance() < 0.5) {
                         color = Color.fromRGBO(r, g, b, 0.7);
                       }

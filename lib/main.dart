@@ -34,6 +34,9 @@ class MyApp extends StatelessWidget {
         popupMenuTheme: PopupMenuThemeData(color: Colors.black),
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: Colors.black,
+        ),
+        navigationRailTheme: NavigationRailThemeData(
+          backgroundColor: Colors.black
         )
       ),
       home: SplashScreen(),

@@ -32,6 +32,9 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.black,
         appBarTheme: AppBarTheme(color: Colors.black),
         popupMenuTheme: PopupMenuThemeData(color: Colors.black),
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: Colors.black,
+        )
       ),
       home: SplashScreen(),
     );

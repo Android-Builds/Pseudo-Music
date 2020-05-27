@@ -15,9 +15,12 @@ StreamSubscription periodicSub2;
 
 class _SongListState extends State<SongList> {
   List<SongInfo> songlist = new List<SongInfo>();
-  int r, g, b;
-  double o;
   bool showsSearchBar = false;
+  int r;
+  int g;
+  int b;
+  double o;
+  Timer t, t1;
 
   getColors() {
     r = Random().nextInt(255);
@@ -26,28 +29,83 @@ class _SongListState extends State<SongList> {
     o = Random().nextDouble();
   }
 
-  void initState() {
-    super.initState();
-    getColors();
-  }
-
   updateParams() {
     periodicSub =
-        new Stream.periodic(const Duration(milliseconds: 500)).listen((_) {
+        Stream.periodic(const Duration(milliseconds: 500)).listen((_) {
       setState(() {
-        r = Random().nextInt(255);
-        g = Random().nextInt(255);
-        b = Random().nextInt(255);
-        o = Random().nextDouble();
+        r = ur = Random().nextInt(255);
+        g = ug = Random().nextInt(255);
+        b = ub = Random().nextInt(255);
+        o = uo = Random().nextDouble();
+      });
+    });
+    periodicSub2 =
+        Stream.periodic(const Duration(milliseconds: 500)).listen((_) {
+      setState(() {});
+    });
+    periodicSub.pause();
+    periodicSub2.pause();
+  }
+
+  // checkStatus() {
+  //   if (disco && periodicSub.isPaused) {
+  //     periodicSub.resume();
+  //   } else {
+  //     periodicSub.pause();
+  //   }
+  //   if (disco2 && periodicSub2.isPaused) {
+  //     periodicSub2.resume();
+  //   } else {
+  //     periodicSub2.pause();
+  //   }
+  // }
+
+  updateColors() {
+    t = Timer.periodic(const Duration(milliseconds: 500), (Timer t) {
+      setState(() {
+        r = ur = Random().nextInt(255);
+        g = ug = Random().nextInt(255);
+        b = ub = Random().nextInt(255);
+        o = uo = Random().nextDouble();
       });
     });
   }
 
-  updateParams2() {
-    periodicSub2 =
-        new Stream.periodic(const Duration(milliseconds: 500)).listen((_) {
-      setState(() {});
+  updateColors2() {
+    t1 = Timer.periodic(const Duration(milliseconds: 500), (Timer t) {
+      setState(() {
+      });
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    if (t != null && t.isActive) {
+      t.cancel();
+    }
+    if (t1 != null && t1.isActive) {
+      t1.cancel();
+    }
+  }
+
+  checkParams() {
+    if(disco) {
+      updateColors();
+    }
+    if(disco2) {
+      updateColors2();
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getColors();
+    checkParams();
+    // if (periodicSub == null && periodicSub2 == null) {
+    //   updateParams();
+    // }
   }
 
   @override
@@ -63,9 +121,9 @@ class _SongListState extends State<SongList> {
                   itemCount: snapshot.data.length + 1,
                   itemBuilder: (context, index) {
                     if (disco2 || randomcol) {
-                      r = Random().nextInt(255);
-                      g = Random().nextInt(255);
-                      b = Random().nextInt(255);
+                      r = ur = Random().nextInt(255);
+                      g = ug = Random().nextInt(255);
+                      b = ub = Random().nextInt(255);
                     }
                     if (index == 0) {
                       return Container(
@@ -82,28 +140,42 @@ class _SongListState extends State<SongList> {
                             IconButton(
                               onPressed: () {
                                 disco = !disco;
-                                setState(() {
-                                  if (disco) {
-                                    updateParams();
-                                    randomcol = false;
-                                  } else {
-                                    periodicSub.cancel();
-                                  }
-                                });
+                                if(t !=null && t.isActive) {
+                                  t.cancel();
+                                } else {
+                                  updateColors();
+                                }
+                                // discoController
+                                //     .add(homepagedisco = !homepagedisco);
+                                // setState(() {
+                                //   if (disco) {
+                                //     periodicSub.resume();
+                                //     randomcol = false;
+                                //   } else {
+                                //     periodicSub.pause();
+                                //   }
+                                // });
                               },
                               icon: Icon(Icons.lightbulb_outline),
                             ),
                             IconButton(
                               onPressed: () {
                                 disco2 = !disco2;
-                                setState(() {
-                                  if (disco2) {
-                                    updateParams2();
-                                    randomcol = true;
-                                  } else {
-                                    periodicSub2.cancel();
-                                  }
-                                });
+                                if(t1 !=null && t1.isActive) {
+                                  t1.cancel();
+                                } else {
+                                  updateColors2();
+                                }
+                                // discoController
+                                //     .add(homepagedisco = !homepagedisco);
+                                // setState(() {
+                                //   if (disco2) {
+                                //     periodicSub2.resume();
+                                //     randomcol = true;
+                                //   } else {
+                                //     periodicSub2.pause();
+                                //   }
+                                // });
                               },
                               icon: Icon(Icons.disc_full),
                             )

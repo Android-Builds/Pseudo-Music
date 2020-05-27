@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:pseudomusic/utils/variables.dart';
 import 'package:pseudomusic/widgets/songlist.dart';
 
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
+
+// StreamSubscription homePeriodicSub;
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
@@ -15,8 +18,7 @@ class _HomePageState extends State<HomePage> {
     Container(
       child: SongList(),
     ),
-    Container(
-    ),
+    Container(),
     Container(
       child: Text('Hello'),
     )
@@ -26,6 +28,14 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _selectedIndex = index;
     });
+    // discoController = new StreamController();
+    // discoController.stream.listen((event) {
+    //   if (event) {
+    //     updateParams();
+    //   } else {
+    //     homePeriodicSub.cancel();
+    //   }
+    // });
   }
 
   @override
@@ -42,9 +52,7 @@ class _HomePageState extends State<HomePage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         elevation: 0.0,
-        backgroundColor: Theme.of(context).backgroundColor,
-        unselectedItemColor: Colors.grey,
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.music_note),
             title: Text('Songs'),
@@ -59,7 +67,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.lightGreenAccent[700],
+        selectedItemColor: Color.fromRGBO(ur, ug, ub, 1),
         onTap: _onItemTapped,
       ),
     );

@@ -126,6 +126,7 @@ class _SongListState extends State<SongList> {
                                   disco2 = false;
                                   t1.cancel();
                                 }
+                                randomcol = false;
                                 disco = !disco;
                                 if (t != null && t.isActive) {
                                   t.cancel();
@@ -142,6 +143,7 @@ class _SongListState extends State<SongList> {
                                   t.cancel();
                                 }
                                 disco2 = !disco2;
+                                randomcol = true;
                                 if (t1 != null && t1.isActive) {
                                   t1.cancel();
                                 } else {
@@ -163,7 +165,7 @@ class _SongListState extends State<SongList> {
                         hoverColor: Colors.blueAccent,
                         leading: CircleAvatar(
                           backgroundColor: color,
-                          child: snapshot.data[index].albumArtwork != null
+                          child: snapshot.data[index - 1].albumArtwork != null
                               ? Image.file(
                                   snapshot.data[index - 1].albumArtwork)
                               : Icon(Icons.music_note),

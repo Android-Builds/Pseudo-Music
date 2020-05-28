@@ -24,10 +24,11 @@ class _SongListState extends State<SongList> {
   Timer t, t1;
 
   getColors() {
-    r = Random().nextInt(255);
-    g = Random().nextInt(255);
-    b = Random().nextInt(255);
-    o = Random().nextDouble();
+    r = ur = Random().nextInt(255);
+    g = ug = Random().nextInt(255);
+    b = ub = Random().nextInt(255);
+    o = uo = Random().nextDouble();
+    discoController.add(false);
   }
 
   updateColors() {

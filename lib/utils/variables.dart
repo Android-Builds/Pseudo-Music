@@ -16,8 +16,10 @@ bool disco2 = false;
 bool randomcol = false;
 bool darkmode = false;
 bool homepagedisco = false;
+bool usenavrails = true;
 
 StreamController discoController;
+StreamController uiController;
 
 getColor(BuildContext context) {
   var brightness = MediaQuery.of(context).platformBrightness;

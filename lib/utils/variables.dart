@@ -17,6 +17,7 @@ bool randomcol = false;
 bool darkmode = false;
 bool homepagedisco = false;
 bool usenavrails = true;
+bool usetabbar = false;
 
 StreamController discoController;
 StreamController uiController;

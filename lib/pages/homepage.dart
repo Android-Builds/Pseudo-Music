@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:pseudomusic/pages/settings.dart';
 import 'package:pseudomusic/utils/variables.dart';
@@ -89,9 +87,9 @@ class _HomePageState extends State<HomePage>
                 ),
               )
             : PreferredSize(
-              preferredSize: Size.fromHeight(0),
-              child: Container(height: 0),
-            ),
+                preferredSize: Size.fromHeight(0),
+                child: Container(height: 0),
+              ),
         body: usenavrails
             ? Row(
                 children: [
@@ -177,6 +175,7 @@ class _HomePageState extends State<HomePage>
                   ),
                 ],
                 currentIndex: _selectedIndex,
+                unselectedItemColor: Colors.grey,
                 selectedItemColor: Color.fromRGBO(ur, ug, ub, 1),
                 onTap: _onItemTapped,
               )

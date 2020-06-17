@@ -27,6 +27,8 @@ dependencies:
   flutter_audio_query:
   lottie:
   flutter_icons:
+  flutter_bloc: ^4.0.1
+  equatable: ^1.2.0
 
 dev_dependencies:
   flutter_test:

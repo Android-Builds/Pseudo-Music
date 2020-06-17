@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pseudomusic/pages/splashcreen.dart';
+import 'package:pseudomusic/utils/variables.dart';
 
 import 'ui/global/theme/bloc/bloc.dart';
-import 'ui/home/home_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: state.themeData,
-      home: HomePage(),
+      home: SplashScreen(),
     );
   }
 }

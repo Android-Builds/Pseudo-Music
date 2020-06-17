@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pseudomusic/utils/variables.dart';
 
 enum AppTheme {
   GreenLight,
@@ -9,19 +10,19 @@ enum AppTheme {
 
 final appThemeData = {
   AppTheme.GreenLight: ThemeData(
-    brightness: Brightness.light,
+    brightness: brightness,
     primaryColor: Colors.green,
   ),
   AppTheme.GreenDark: ThemeData(
-    brightness: Brightness.dark,
+    brightness: brightness,
     primaryColor: Colors.green[700],
   ),
   AppTheme.BlueLight: ThemeData(
-    brightness: Brightness.light,
+    brightness: brightness,
     primaryColor: Colors.blue,
   ),
   AppTheme.BlueDark: ThemeData(
-    brightness: Brightness.dark,
+    brightness: brightness,
     primaryColor: Colors.blue[700],
   ),
 };

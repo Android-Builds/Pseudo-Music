@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:pseudomusic/pages/homepage.dart';
+import 'package:pseudomusic/ui/home/home_page.dart';
 import 'package:pseudomusic/utils/variables.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -32,7 +32,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    darkmode = MediaQuery.of(context).platformBrightness == Brightness.dark;
     return SafeArea(
       child: Scaffold(
         body: Stack(

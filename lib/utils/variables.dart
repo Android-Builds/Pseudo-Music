@@ -8,6 +8,8 @@ int g, ug;
 int b, ub;
 double o, uo;
 
+Brightness brightness;
+
 Future<List<SongInfo>> songs;
 List<SongInfo> musics = new List<SongInfo>();
 // List<Song> savedsongs = new List<Song>();

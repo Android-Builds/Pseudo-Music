@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pseudomusic/pages/splashcreen.dart';
-import 'package:pseudomusic/utils/variables.dart';
 
 import 'ui/global/theme/bloc/bloc.dart';
 
@@ -21,7 +20,11 @@ class MyApp extends StatelessWidget {
   Widget _buildWithTheme(BuildContext context, ThemeState state) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: state.themeData,
+      //theme: state.themeData,
+      //darkTheme: state.themeData.copyWith(brightness: Brightness.dark),
+      theme: ThemeData(
+        accentColor: 
+      ),
       home: SplashScreen(),
     );
   }

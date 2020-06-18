@@ -10,19 +10,19 @@ enum AppTheme {
 
 final appThemeData = {
   AppTheme.GreenLight: ThemeData(
-    brightness: brightness,
+    brightness: Brightness.light,
     primaryColor: Colors.green,
   ),
   AppTheme.GreenDark: ThemeData(
-    brightness: brightness,
+    brightness: Brightness.dark,
     primaryColor: Colors.green[700],
   ),
   AppTheme.BlueLight: ThemeData(
-    brightness: brightness,
+    brightness: Brightness.light,
     primaryColor: Colors.blue,
   ),
   AppTheme.BlueDark: ThemeData(
-    brightness: brightness,
+    brightness: Brightness.dark,
     primaryColor: Colors.blue[700],
   ),
 };

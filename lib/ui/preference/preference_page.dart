@@ -20,11 +20,10 @@ class PreferencePage extends StatelessWidget {
         itemBuilder: (context, index) {
           final itemAppTheme = AppTheme.values[index];
           return Card(
-            color: appThemeData[itemAppTheme].primaryColor,
+            color: appThemeData[itemAppTheme],
             child: ListTile(
               title: Text(
                 itemAppTheme.toString(),
-                style: appThemeData[itemAppTheme].textTheme.bodyText1,
               ),
               onTap: () {
                 BlocProvider.of<ThemeBloc>(context).add(

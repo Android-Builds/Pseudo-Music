@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       //theme: state.themeData,
       //darkTheme: state.themeData.copyWith(brightness: Brightness.dark),
       theme: ThemeData(
-        accentColor: 
+        accentColor: state.themeData,
       ),
       home: SplashScreen(),
     );

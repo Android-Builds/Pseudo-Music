@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 @immutable
 class ThemeState extends Equatable {
-  final Color themeData;
+  final ThemeData themeData;
 
   ThemeState({
     @required this.themeData,

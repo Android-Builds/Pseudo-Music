@@ -22,9 +22,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       //theme: state.themeData,
       //darkTheme: state.themeData.copyWith(brightness: Brightness.dark),
-      theme: ThemeData(
-        accentColor: state.themeData,
-      ),
+      theme: state.themeData,
       home: SplashScreen(),
     );
   }

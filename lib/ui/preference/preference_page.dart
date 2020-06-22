@@ -1,36 +1,84 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:pseudomusic/ui/global/theme/app_themes.dart';
 import 'package:pseudomusic/ui/global/theme/bloc/bloc.dart';
 import 'package:pseudomusic/ui/global/theme/bloc/theme_event.dart';
 
-class PreferencePage extends StatelessWidget {
+class PreferencePage extends StatefulWidget {
+  @override
+  _PreferencePageState createState() => _PreferencePageState();
+}
+
+class _PreferencePageState extends State<PreferencePage> {
+  bool lightTheme = true;
+
+  Color currentColor = Colors.limeAccent;
+
+  void changeColor(Color color) => setState(() => currentColor = color);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Preferences'),
       ),
-      body: ListView.builder(
-        padding: EdgeInsets.all(8),
-        itemCount: AppTheme.values.length,
-        itemBuilder: (context, index) {
-          final itemAppTheme = AppTheme.values[index];
-          return Card(
-            color: appThemeData[itemAppTheme].primaryColor,
-            child: ListTile(
-              title: Text(
-                itemAppTheme.toString(),
-                style: appThemeData[itemAppTheme].textTheme.body1,
-              ),
-              onTap: () {
-                BlocProvider.of<ThemeBloc>(context).add(
-                  ThemeChanged(theme: itemAppTheme),
+      body: Column(
+        children: [
+          Flexible(
+            child: ListView.builder(
+              padding: EdgeInsets.all(8),
+              itemCount: AppTheme.values.length,
+              itemBuilder: (context, index) {
+                final itemAppTheme = AppTheme.values[index];
+                return Card(
+                  color: appThemeData[itemAppTheme].primaryColor,
+                  child: ListTile(
+                    title: Text(
+                      itemAppTheme.toString(),
+                      style: appThemeData[itemAppTheme].textTheme.body1,
+                    ),
+                    onTap: () {
+                      BlocProvider.of<ThemeBloc>(context).add(
+                        ThemeChanged(theme: itemAppTheme),
+                      );
+                    },
+                  ),
                 );
               },
             ),
-          );
-        },
+          ),
+          RaisedButton(
+            child: Text('Color'),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    titlePadding: const EdgeInsets.all(0.0),
+                    contentPadding: const EdgeInsets.all(0.0),
+                    content: SingleChildScrollView(
+                      child: ColorPicker(
+                        pickerColor: currentColor,
+                        onColorChanged: changeColor,
+                        colorPickerWidth: 300.0,
+                        pickerAreaHeightPercent: 0.7,
+                        enableAlpha: true,
+                        displayThumbColor: true,
+                        showLabel: true,
+                        paletteType: PaletteType.hsv,
+                        pickerAreaBorderRadius: const BorderRadius.only(
+                          topLeft: const Radius.circular(2.0),
+                          topRight: const Radius.circular(2.0),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+        ],
       ),
     );
   }

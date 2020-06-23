@@ -68,19 +68,20 @@ class _ColorPickerDialogState extends State<ColorPickerDialog> {
   bool lightTheme = true;
   Color currentColor = Colors.limeAccent;
   String hex;
+  TextEditingController hexController = new TextEditingController();
 
   void changeColor(Color color) {
     setState(() {
       currentColor = color;
       print('Here');
-      hex = '#${currentColor.value.toRadixString(16)}';
+      hexController.text = '#${currentColor.value.toRadixString(16)}';
     });
   }
 
   @override
   void initState() {
     super.initState();
-    hex = '#${currentColor.value.toRadixString(16)}';
+    hexController.text = '#${currentColor.value.toRadixString(16)}';
   }
 
   @override
@@ -98,9 +99,15 @@ class _ColorPickerDialogState extends State<ColorPickerDialog> {
               ),
               child: Row(
                 children: [
-                  Text('abcd'),
+                  Text('Color Code: '),
                   Spacer(),
-                  Text(hex),
+                  SizedBox(
+                    width: 80.0,
+                    child: TextFormField(
+                      textAlign: TextAlign.center,
+                      controller: hexController,
+                    ),
+                  ),
                 ],
               ),
             ),

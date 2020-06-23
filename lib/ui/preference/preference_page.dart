@@ -116,8 +116,7 @@ class _ColorPickerDialogState extends State<ColorPickerDialog> {
                       onSubmitted: (value) {
                         if (value.length == 6) {
                           changeColor(
-                            Color(int.parse(
-                                '0xff' + value.substring(1, value.length))),
+                            Color(int.parse('0xff' + value)),
                           );
                         }
                       },
@@ -133,7 +132,7 @@ class _ColorPickerDialogState extends State<ColorPickerDialog> {
               colorPickerWidth: 300.0,
               pickerAreaHeightPercent: 0.8,
               enableAlpha: false,
-              displayThumbColor: false,
+              displayThumbColor: true,
               showLabel: false,
               paletteType: PaletteType.hsv,
               pickerAreaBorderRadius: const BorderRadius.only(

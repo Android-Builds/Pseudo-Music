@@ -4,6 +4,7 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:pseudomusic/ui/global/theme/app_themes.dart';
 import 'package:pseudomusic/ui/global/theme/bloc/bloc.dart';
 import 'package:pseudomusic/ui/global/theme/bloc/theme_event.dart';
+import 'package:pseudomusic/utils/variables.dart';
 
 class PreferencePage extends StatefulWidget {
   @override
@@ -11,8 +12,6 @@ class PreferencePage extends StatefulWidget {
 }
 
 class _PreferencePageState extends State<PreferencePage> {
-  _showDialog() {}
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,7 +65,6 @@ class ColorPickerDialog extends StatefulWidget {
 
 class _ColorPickerDialogState extends State<ColorPickerDialog> {
   bool lightTheme = true;
-  Color currentColor = Colors.limeAccent;
   String hex;
   TextEditingController hexController = new TextEditingController();
 

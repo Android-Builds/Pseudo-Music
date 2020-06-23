@@ -9,6 +9,7 @@ int b, ub;
 double o, uo;
 
 Brightness brightness;
+Color currentColor = Colors.limeAccent;
 
 Future<List<SongInfo>> songs;
 List<SongInfo> musics = new List<SongInfo>();

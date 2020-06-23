@@ -73,7 +73,6 @@ class _ColorPickerDialogState extends State<ColorPickerDialog> {
   void changeColor(Color color) {
     setState(() {
       currentColor = color;
-      print('Here');
       hexController.text = '#${currentColor.value.toRadixString(16)}';
     });
   }
@@ -106,6 +105,10 @@ class _ColorPickerDialogState extends State<ColorPickerDialog> {
                     child: TextFormField(
                       textAlign: TextAlign.center,
                       controller: hexController,
+                      onChanged: (value) {
+                        changeColor(Color(int.parse(
+                            '0x' + value.substring(1, value.length))));
+                      },
                     ),
                   ),
                 ],

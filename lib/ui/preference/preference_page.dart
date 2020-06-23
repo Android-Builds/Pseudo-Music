@@ -111,8 +111,7 @@ class _ColorPickerDialogState extends State<ColorPickerDialog> {
                   SizedBox(
                     width: 80.0,
                     child: TextField(
-                      textAlign: TextAlign.end,
-                      autofocus: true,
+                      textAlign: TextAlign.center,
                       textInputAction: TextInputAction.go,
                       onSubmitted: (value) {
                         if (value.length == 6) {

@@ -20,31 +20,22 @@ class _PreferencePageState extends State<PreferencePage> {
       ),
       body: Column(
         children: [
-          Flexible(
-            child: ListView.builder(
-              padding: EdgeInsets.all(8),
-              itemCount: AppTheme.values.length,
-              itemBuilder: (context, index) {
-                final itemAppTheme = AppTheme.values[index];
-                return Card(
-                  color: appThemeData[itemAppTheme].primaryColor,
-                  child: ListTile(
-                    title: Text(
-                      itemAppTheme.toString(),
-                      style: appThemeData[itemAppTheme].textTheme.bodyText1,
-                    ),
-                    onTap: () {
-                      // BlocProvider.of<ThemeBloc>(context).add(
-                      //   ThemeChanged(theme: itemAppTheme),
-                      // );
-                    },
-                  ),
-                );
+          ListTile(
+            title: Text('Color'),
+            onTap: () => showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return ColorPickerDialog();
               },
             ),
           ),
-          RaisedButton(
-            child: Text('Color'),
+          MaterialButton(
+            minWidth: MediaQuery.of(context).size.width,
+            child: Text(
+              'Color',
+              textAlign: TextAlign.left,
+              style: TextStyle(fontSize: 20.0),
+            ),
             onPressed: () => showDialog(
               context: context,
               builder: (BuildContext context) {
@@ -66,19 +57,22 @@ class ColorPickerDialog extends StatefulWidget {
 class _ColorPickerDialogState extends State<ColorPickerDialog> {
   bool lightTheme = true;
   String hex;
-  TextEditingController hexController = new TextEditingController();
+  TextEditingController hexController = TextEditingController();
 
   void changeColor(Color color) {
     setState(() {
       currentColor = color;
-      hexController.text = '#${currentColor.value.toRadixString(16)}';
+      hexController.text =
+          hex = '${currentColor.value.toRadixString(16).substring(2)}';
+      //print(hexController.text);
     });
   }
 
   @override
   void initState() {
     super.initState();
-    hexController.text = '#${currentColor.value.toRadixString(16)}';
+    hex = hexController.text =
+        '${currentColor.value.toRadixString(16).substring(2)}';
   }
 
   @override
@@ -90,7 +84,7 @@ class _ColorPickerDialogState extends State<ColorPickerDialog> {
           child: Text('OK'),
           onPressed: () {
             ThemeData theme = new ThemeData(
-              brightness: Brightness.light,
+              brightness: MediaQuery.of(context).platformBrightness,
               primaryColor: currentColor,
             );
             BlocProvider.of<ThemeBloc>(context).add(
@@ -116,13 +110,19 @@ class _ColorPickerDialogState extends State<ColorPickerDialog> {
                   Spacer(),
                   SizedBox(
                     width: 80.0,
-                    child: TextFormField(
-                      textAlign: TextAlign.center,
-                      controller: hexController,
-                      onChanged: (value) {
-                        changeColor(Color(int.parse(
-                            '0x' + value.substring(1, value.length))));
+                    child: TextField(
+                      textAlign: TextAlign.end,
+                      autofocus: true,
+                      textInputAction: TextInputAction.go,
+                      onSubmitted: (value) {
+                        if (value.length == 6) {
+                          changeColor(
+                            Color(int.parse(
+                                '0xff' + value.substring(1, value.length))),
+                          );
+                        }
                       },
+                      controller: hexController,
                     ),
                   ),
                 ],
@@ -133,7 +133,7 @@ class _ColorPickerDialogState extends State<ColorPickerDialog> {
               onColorChanged: changeColor,
               colorPickerWidth: 300.0,
               pickerAreaHeightPercent: 0.8,
-              enableAlpha: true,
+              enableAlpha: false,
               displayThumbColor: false,
               showLabel: false,
               paletteType: PaletteType.hsv,

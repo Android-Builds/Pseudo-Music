@@ -13,7 +13,7 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
     ThemeEvent event,
   ) async* {
     if (event is ThemeChanged) {
-      yield ThemeState(themeData: appThemeData[event.theme]);
+      yield ThemeState(themeData: event.theme);
     }
   }
 }

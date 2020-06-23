@@ -34,9 +34,9 @@ class _PreferencePageState extends State<PreferencePage> {
                       style: appThemeData[itemAppTheme].textTheme.bodyText1,
                     ),
                     onTap: () {
-                      BlocProvider.of<ThemeBloc>(context).add(
-                        ThemeChanged(theme: itemAppTheme),
-                      );
+                      // BlocProvider.of<ThemeBloc>(context).add(
+                      //   ThemeChanged(theme: itemAppTheme),
+                      // );
                     },
                   ),
                 );
@@ -84,7 +84,23 @@ class _ColorPickerDialogState extends State<ColorPickerDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      contentPadding: const EdgeInsets.all(15.0),
+      actionsPadding: EdgeInsets.zero,
+      actions: [
+        FlatButton(
+          child: Text('OK'),
+          onPressed: () {
+            ThemeData theme = new ThemeData(
+              brightness: Brightness.light,
+              primaryColor: currentColor,
+            );
+            BlocProvider.of<ThemeBloc>(context).add(
+              ThemeChanged(theme: theme),
+            );
+            Navigator.pop(context);
+          },
+        )
+      ],
+      contentPadding: const EdgeInsets.all(0.0),
       content: SingleChildScrollView(
         child: Column(
           children: [
@@ -122,8 +138,8 @@ class _ColorPickerDialogState extends State<ColorPickerDialog> {
               showLabel: false,
               paletteType: PaletteType.hsv,
               pickerAreaBorderRadius: const BorderRadius.only(
-                topLeft: const Radius.circular(2.0),
-                topRight: const Radius.circular(2.0),
+                topLeft: const Radius.circular(0.0),
+                topRight: const Radius.circular(0.0),
               ),
             ),
           ],

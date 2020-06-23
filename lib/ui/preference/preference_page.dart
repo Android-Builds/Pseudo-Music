@@ -11,11 +11,7 @@ class PreferencePage extends StatefulWidget {
 }
 
 class _PreferencePageState extends State<PreferencePage> {
-  bool lightTheme = true;
-
-  Color currentColor = Colors.limeAccent;
-
-  void changeColor(Color color) => setState(() => currentColor = color);
+  _showDialog() {}
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +32,7 @@ class _PreferencePageState extends State<PreferencePage> {
                   child: ListTile(
                     title: Text(
                       itemAppTheme.toString(),
-                      style: appThemeData[itemAppTheme].textTheme.body1,
+                      style: appThemeData[itemAppTheme].textTheme.bodyText1,
                     ),
                     onTap: () {
                       BlocProvider.of<ThemeBloc>(context).add(
@@ -50,35 +46,80 @@ class _PreferencePageState extends State<PreferencePage> {
           ),
           RaisedButton(
             child: Text('Color'),
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    titlePadding: const EdgeInsets.all(0.0),
-                    contentPadding: const EdgeInsets.all(0.0),
-                    content: SingleChildScrollView(
-                      child: ColorPicker(
-                        pickerColor: currentColor,
-                        onColorChanged: changeColor,
-                        colorPickerWidth: 300.0,
-                        pickerAreaHeightPercent: 0.7,
-                        enableAlpha: true,
-                        displayThumbColor: true,
-                        showLabel: true,
-                        paletteType: PaletteType.hsv,
-                        pickerAreaBorderRadius: const BorderRadius.only(
-                          topLeft: const Radius.circular(2.0),
-                          topRight: const Radius.circular(2.0),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              );
-            },
+            onPressed: () => showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return ColorPickerDialog();
+              },
+            ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class ColorPickerDialog extends StatefulWidget {
+  @override
+  _ColorPickerDialogState createState() => _ColorPickerDialogState();
+}
+
+class _ColorPickerDialogState extends State<ColorPickerDialog> {
+  bool lightTheme = true;
+  Color currentColor = Colors.limeAccent;
+  String hex;
+
+  void changeColor(Color color) {
+    setState(() {
+      currentColor = color;
+      print('Here');
+      hex = '#${currentColor.value.toRadixString(16)}';
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    hex = '#${currentColor.value.toRadixString(16)}';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      contentPadding: const EdgeInsets.all(15.0),
+      content: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                bottom: 15.0,
+                right: 10.0,
+                left: 10.0,
+              ),
+              child: Row(
+                children: [
+                  Text('abcd'),
+                  Spacer(),
+                  Text(hex),
+                ],
+              ),
+            ),
+            ColorPicker(
+              pickerColor: currentColor,
+              onColorChanged: changeColor,
+              colorPickerWidth: 300.0,
+              pickerAreaHeightPercent: 0.8,
+              enableAlpha: true,
+              displayThumbColor: false,
+              showLabel: false,
+              paletteType: PaletteType.hsv,
+              pickerAreaBorderRadius: const BorderRadius.only(
+                topLeft: const Radius.circular(2.0),
+                topRight: const Radius.circular(2.0),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

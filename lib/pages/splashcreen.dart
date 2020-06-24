@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:pseudomusic/ui/home/home_page.dart';
+import 'package:pseudomusic/ui/home/homepage.dart';
 import 'package:pseudomusic/utils/variables.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -25,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
     getuColors();
     fetchSongs();
     Timer(Duration(seconds: 2), () {
-      Route route = MaterialPageRoute(builder: (context) => HomePage());
+      Route route = MaterialPageRoute(builder: (context) => HomePage2());
       Navigator.pushReplacement(context, route);
     });
   }

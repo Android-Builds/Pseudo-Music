@@ -3,15 +3,16 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:pseudomusic/pages/settings.dart';
+import 'package:pseudomusic/ui/preference/preference_page.dart';
 import 'package:pseudomusic/utils/variables.dart';
 import 'package:pseudomusic/widgets/songlist.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage2 extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomePage2State createState() => _HomePage2State();
 }
 
-class _HomePageState extends State<HomePage>
+class _HomePage2State extends State<HomePage2>
     with SingleTickerProviderStateMixin {
   int _selectedIndex = 0;
   Timer t;
@@ -25,7 +26,7 @@ class _HomePageState extends State<HomePage>
     Container(
       child: Text('Hello'),
     ),
-    SettingsPage(),
+    PreferencePage(),
   ];
 
   updateColors2() {
@@ -116,7 +117,7 @@ class _HomePageState extends State<HomePage>
                       NavigationRailDestination(
                         icon: Icon(Ionicons.ios_settings),
                         selectedIcon: Icon(Ionicons.ios_settings),
-                        label: Text('Albums'),
+                        label: Text('Settings'),
                       ),
                     ],
                     selectedIndex: _selectedIndex,

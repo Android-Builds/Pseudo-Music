@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:pseudomusic/ui/global/theme/app_themes.dart';
 import 'package:pseudomusic/ui/global/theme/bloc/bloc.dart';
 import 'package:pseudomusic/ui/global/theme/bloc/theme_event.dart';
 import 'package:pseudomusic/utils/variables.dart';
@@ -23,20 +22,6 @@ class _PreferencePageState extends State<PreferencePage> {
           ListTile(
             title: Text('Color'),
             onTap: () => showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return ColorPickerDialog();
-              },
-            ),
-          ),
-          MaterialButton(
-            minWidth: MediaQuery.of(context).size.width,
-            child: Text(
-              'Color',
-              textAlign: TextAlign.left,
-              style: TextStyle(fontSize: 20.0),
-            ),
-            onPressed: () => showDialog(
               context: context,
               builder: (BuildContext context) {
                 return ColorPickerDialog();

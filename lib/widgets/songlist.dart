@@ -22,6 +22,7 @@ class _SongListState extends State<SongList> {
   int b;
   double o;
   Timer t, t1;
+  Color listcolor;
 
   getColors() {
     r = ur = Random().nextInt(255);
@@ -77,6 +78,9 @@ class _SongListState extends State<SongList> {
 
   @override
   Widget build(BuildContext context) {
+    listcolor = disco || disco2
+        ? Color.fromRGBO(r, g, b, o > 0.7 ? o : 0.7)
+        : Theme.of(context).accentColor;
     return Stack(
       children: [
         FutureBuilder(
@@ -103,8 +107,7 @@ class _SongListState extends State<SongList> {
                               style: TextStyle(
                                 fontSize: 35.0,
                                 fontWeight: FontWeight.bold,
-                                color:
-                                    Color.fromRGBO(r, g, b, o > 0.7 ? o : 0.7),
+                                color: listcolor,
                               ),
                             ),
                             SizedBox(width: 10),
@@ -128,8 +131,7 @@ class _SongListState extends State<SongList> {
                               },
                               icon: Icon(
                                 Icons.lightbulb_outline,
-                                color:
-                                    Color.fromRGBO(r, g, b, o > 0.7 ? o : 0.7),
+                                color: listcolor,
                               ),
                             ),
                             IconButton(
@@ -152,17 +154,18 @@ class _SongListState extends State<SongList> {
                               },
                               icon: Icon(
                                 FontAwesome.lightbulb_o,
-                                color:
-                                    Color.fromRGBO(r, g, b, o > 0.7 ? o : 0.7),
+                                color: listcolor,
                               ),
                             )
                           ],
                         ),
                       );
                     } else {
-                      Color color = Color.fromRGBO(r, g, b, o > 0.7 ? o : 0.7);
+                      Color color = listcolor;
                       if (darkmode && color.computeLuminance() < 0.5) {
-                        color = Color.fromRGBO(r, g, b, 0.7);
+                        color = disco || disco2
+                            ? Color.fromRGBO(r, g, b, 0.7)
+                            : Theme.of(context).accentColor;
                       }
                       return ListTile(
                         focusColor: Colors.blueAccent,

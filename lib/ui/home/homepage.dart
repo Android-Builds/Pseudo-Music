@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:pseudomusic/pages/settings.dart';
 import 'package:pseudomusic/ui/preference/preference_page.dart';
 import 'package:pseudomusic/utils/variables.dart';
 import 'package:pseudomusic/widgets/songlist.dart';
@@ -17,6 +16,7 @@ class _HomePage2State extends State<HomePage2>
   int _selectedIndex = 0;
   Timer t;
   TabController _tabController;
+  Color uicolor;
 
   List<Widget> _widgetOptions = <Widget>[
     Container(
@@ -66,14 +66,17 @@ class _HomePage2State extends State<HomePage2>
 
   @override
   Widget build(BuildContext context) {
+    uicolor = disco || disco2
+        ? Color.fromRGBO(ur, ug, ub, 1)
+        : Theme.of(context).accentColor;
     return SafeArea(
       child: Scaffold(
         appBar: usetabbar
             ? PreferredSize(
                 preferredSize: Size.fromHeight(kToolbarHeight),
                 child: TabBar(
-                  unselectedLabelColor: Color.fromRGBO(ur, ug, ub, 1),
-                  labelColor: Color.fromRGBO(ur, ug, ub, 1),
+                  unselectedLabelColor: Colors.grey,
+                  labelColor: uicolor,
                   tabs: [
                     Tab(icon: Icon(Icons.music_note)),
                     Tab(
@@ -84,7 +87,7 @@ class _HomePage2State extends State<HomePage2>
                     )
                   ],
                   controller: _tabController,
-                  indicatorColor: Color.fromRGBO(ur, ug, ub, 1),
+                  indicatorColor: uicolor,
                 ),
               )
             : PreferredSize(
@@ -123,10 +126,8 @@ class _HomePage2State extends State<HomePage2>
                     selectedIndex: _selectedIndex,
                     onDestinationSelected: _onItemTapped,
                     labelType: NavigationRailLabelType.selected,
-                    selectedLabelTextStyle:
-                        TextStyle(color: Color.fromRGBO(ur, ug, ub, 1)),
-                    selectedIconTheme:
-                        IconThemeData(color: Color.fromRGBO(ur, ug, ub, 1)),
+                    selectedLabelTextStyle: TextStyle(color: uicolor),
+                    selectedIconTheme: IconThemeData(color: uicolor),
                   ),
                   VerticalDivider(
                     thickness: 2,
@@ -177,7 +178,7 @@ class _HomePage2State extends State<HomePage2>
                 ],
                 currentIndex: _selectedIndex,
                 unselectedItemColor: Colors.grey,
-                selectedItemColor: Color.fromRGBO(ur, ug, ub, 1),
+                selectedItemColor: uicolor,
                 onTap: _onItemTapped,
               )
             : Container(

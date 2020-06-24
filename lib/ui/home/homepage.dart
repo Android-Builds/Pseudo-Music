@@ -147,7 +147,7 @@ class _HomePage2State extends State<HomePage2>
                       Container(
                         child: Text('Hello'),
                       ),
-                      SettingsPage(),
+                      PreferencePage(),
                     ],
                     controller: _tabController,
                   )

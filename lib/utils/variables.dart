@@ -8,8 +8,11 @@ int g, ug;
 int b, ub;
 double o, uo;
 
+enum NavBarPrefs { rails, tab, bottom }
+
 Brightness brightness;
 Color currentColor = Colors.limeAccent;
+NavBarPrefs navpref = NavBarPrefs.bottom;
 
 Future<List<SongInfo>> songs;
 List<SongInfo> musics = new List<SongInfo>();
@@ -19,7 +22,8 @@ bool disco2 = false;
 bool randomcol = false;
 bool darkmode = false;
 bool homepagedisco = false;
-bool usenavrails = true;
+
+bool usenavrails = false;
 bool usetabbar = false;
 
 StreamController discoController;

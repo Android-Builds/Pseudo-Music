@@ -80,7 +80,7 @@ class _SongListState extends State<SongList> {
   Widget build(BuildContext context) {
     listcolor = disco || disco2
         ? Color.fromRGBO(r, g, b, o > 0.7 ? o : 0.7)
-        : Theme.of(context).accentColor;
+        : Theme.of(context).primaryColor;
     return Stack(
       children: [
         FutureBuilder(
@@ -165,7 +165,7 @@ class _SongListState extends State<SongList> {
                       if (darkmode && color.computeLuminance() < 0.5) {
                         color = disco || disco2
                             ? Color.fromRGBO(r, g, b, 0.7)
-                            : Theme.of(context).accentColor;
+                            : Theme.of(context).primaryColor;
                       }
                       return ListTile(
                         focusColor: Colors.blueAccent,

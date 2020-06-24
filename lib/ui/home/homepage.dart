@@ -68,7 +68,7 @@ class _HomePage2State extends State<HomePage2>
   Widget build(BuildContext context) {
     uicolor = disco || disco2
         ? Color.fromRGBO(ur, ug, ub, 1)
-        : Theme.of(context).accentColor;
+        : Theme.of(context).primaryColor;
     return SafeArea(
       child: Scaffold(
         appBar: usetabbar

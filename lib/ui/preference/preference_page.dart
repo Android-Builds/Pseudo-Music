@@ -133,6 +133,7 @@ class _PreferencePageState extends State<PreferencePage> {
           ),
           SwitchListTile(
             title: Text('Disco Mode'),
+            activeColor: color,
             value: disco,
             onChanged: (value) {
               setState(() {
@@ -144,6 +145,7 @@ class _PreferencePageState extends State<PreferencePage> {
           RadioListTile<DiscoModes>(
             title: const Text('Unison'),
             value: DiscoModes.unison,
+            activeColor: color,
             groupValue: discomode,
             onChanged: disco
                 ? (DiscoModes value) {
@@ -157,6 +159,7 @@ class _PreferencePageState extends State<PreferencePage> {
           RadioListTile<DiscoModes>(
             title: const Text('Random'),
             value: DiscoModes.random,
+            activeColor: color,
             groupValue: discomode,
             onChanged: disco
                 ? (DiscoModes value) {
@@ -179,6 +182,7 @@ class _PreferencePageState extends State<PreferencePage> {
           RadioListTile<DiscoModeStatus>(
             title: const Text('Always'),
             value: DiscoModeStatus.always,
+            activeColor: color,
             groupValue: modeStatus,
             onChanged: disco
                 ? (DiscoModeStatus value) {
@@ -191,6 +195,7 @@ class _PreferencePageState extends State<PreferencePage> {
           RadioListTile<DiscoModeStatus>(
             title: const Text('When Playing'),
             value: DiscoModeStatus.onplay,
+            activeColor: color,
             groupValue: modeStatus,
             onChanged: disco
                 ? (DiscoModeStatus value) {

@@ -176,26 +176,26 @@ class _PreferencePageState extends State<PreferencePage> {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
-          RadioListTile<DiscoModes>(
-            title: const Text('Unison'),
-            value: DiscoModes.unison,
-            groupValue: discomode,
+          RadioListTile<DiscoModeStatus>(
+            title: const Text('Always'),
+            value: DiscoModeStatus.always,
+            groupValue: modeStatus,
             onChanged: disco
-                ? (DiscoModes value) {
+                ? (DiscoModeStatus value) {
                     setState(() {
-                      discomode = value;
+                      modeStatus = value;
                     });
                   }
                 : null,
           ),
-          RadioListTile<DiscoModes>(
-            title: const Text('Random'),
-            value: DiscoModes.random,
-            groupValue: discomode,
+          RadioListTile<DiscoModeStatus>(
+            title: const Text('When Playing'),
+            value: DiscoModeStatus.onplay,
+            groupValue: modeStatus,
             onChanged: disco
-                ? (DiscoModes value) {
+                ? (DiscoModeStatus value) {
                     setState(() {
-                      discomode = value;
+                      modeStatus = value;
                     });
                   }
                 : null,

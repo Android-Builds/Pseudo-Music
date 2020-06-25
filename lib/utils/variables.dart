@@ -13,6 +13,7 @@ Brightness brightness;
 Color currentColor = Colors.limeAccent;
 NavBarPrefs navpref = NavBarPrefs.bottom;
 DiscoModes discomode = DiscoModes.unison;
+DiscoModeStatus modeStatus = DiscoModeStatus.always;
 
 Future<List<SongInfo>> songs;
 List<SongInfo> musics = new List<SongInfo>();

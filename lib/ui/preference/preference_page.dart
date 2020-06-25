@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:pseudomusic/ui/global/disco/bloc/discobloc.dart';
+import 'package:pseudomusic/ui/global/theme/bloc/bloc.dart';
+import 'package:pseudomusic/utils/constants.dart';
 import 'package:pseudomusic/utils/variables.dart';
 import 'package:pseudomusic/widgets/colorpicker.dart';
 
@@ -12,7 +16,7 @@ class _PreferencePageState extends State<PreferencePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: ListView(
         children: [
           ListTile(
             leading: Icon(MaterialCommunityIcons.palette),
@@ -88,6 +92,89 @@ class _PreferencePageState extends State<PreferencePage> {
                 print(usenavrails);
               });
             },
+          ),
+          SizedBox(
+            width: 200.0,
+            child: Divider(
+              thickness: 1.2,
+            ),
+          ),
+          ListTile(
+            leading: Icon(MaterialCommunityIcons.lightbulb),
+            title: Text(
+              'Disco',
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontSize: 13.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          SwitchListTile(
+            title: Text('Disco Mode'),
+            value: disco,
+            onChanged: (value) {
+              setState(() {
+                disco = value;
+              });
+            },
+          ),
+          RadioListTile<DiscoModes>(
+            title: const Text('Unison'),
+            value: DiscoModes.unison,
+            groupValue: discomode,
+            onChanged: disco
+                ? (DiscoModes value) {
+                    setState(() {
+                      discomode = value;
+                    });
+                  }
+                : null,
+          ),
+          RadioListTile<DiscoModes>(
+            title: const Text('Random'),
+            value: DiscoModes.random,
+            groupValue: discomode,
+            onChanged: disco
+                ? (DiscoModes value) {
+                    setState(() {
+                      discomode = value;
+                    });
+                  }
+                : null,
+          ),
+          ListTile(
+            contentPadding: EdgeInsets.only(left: 30.0),
+            enabled: disco,
+            dense: true,
+            title: Text(
+              'Mode Status',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+          RadioListTile<DiscoModes>(
+            title: const Text('Unison'),
+            value: DiscoModes.unison,
+            groupValue: discomode,
+            onChanged: disco
+                ? (DiscoModes value) {
+                    setState(() {
+                      discomode = value;
+                    });
+                  }
+                : null,
+          ),
+          RadioListTile<DiscoModes>(
+            title: const Text('Random'),
+            value: DiscoModes.random,
+            groupValue: discomode,
+            onChanged: disco
+                ? (DiscoModes value) {
+                    setState(() {
+                      discomode = value;
+                    });
+                  }
+                : null,
           ),
         ],
       ),

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -13,6 +15,12 @@ class PreferencePage extends StatefulWidget {
 }
 
 class _PreferencePageState extends State<PreferencePage> {
+  @override
+  void initState() {
+    super.initState();
+    listdiscoController = new StreamController();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -116,6 +124,7 @@ class _PreferencePageState extends State<PreferencePage> {
             onChanged: (value) {
               setState(() {
                 disco = value;
+                listdiscoController.add(disco1 = !disco1);
               });
             },
           ),

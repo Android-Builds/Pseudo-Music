@@ -30,6 +30,8 @@ bool usetabbar = false;
 StreamController discoController;
 StreamController uiController;
 
+StreamController listdiscoController;
+
 getColor(BuildContext context) {
   var brightness = MediaQuery.of(context).platformBrightness;
   if (brightness == Brightness.dark)

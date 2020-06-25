@@ -69,6 +69,24 @@ class _SongListState extends State<SongList> {
     }
   }
 
+  discoCtrl() {
+    listdiscoController.stream.listen((event) {
+      if (disco2) {
+        disco2 = false;
+        t1.cancel();
+        discoController.add(homepagedisco = !homepagedisco);
+      }
+      randomcol = false;
+      disco = !disco;
+      discoController.add(homepagedisco = !homepagedisco);
+      if (t != null && t.isActive) {
+        t.cancel();
+      } else {
+        updateColors();
+      }
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -111,52 +129,52 @@ class _SongListState extends State<SongList> {
                               ),
                             ),
                             SizedBox(width: 10),
-                            // IconButton(
-                            //   onPressed: () {
-                            //     if (disco2) {
-                            //       disco2 = false;
-                            //       t1.cancel();
-                            //       discoController
-                            //           .add(homepagedisco = !homepagedisco);
-                            //     }
-                            //     randomcol = false;
-                            //     disco = !disco;
-                            //     discoController
-                            //         .add(homepagedisco = !homepagedisco);
-                            //     if (t != null && t.isActive) {
-                            //       t.cancel();
-                            //     } else {
-                            //       updateColors();
-                            //     }
-                            //   },
-                            //   icon: Icon(
-                            //     Icons.lightbulb_outline,
-                            //     color: listcolor,
-                            //   ),
-                            // ),
-                            // IconButton(
-                            //   onPressed: () {
-                            //     if (disco) {
-                            //       disco = false;
-                            //       t.cancel();
-                            //       discoController
-                            //           .add(homepagedisco = !homepagedisco);
-                            //     }
-                            //     disco2 = !disco2;
-                            //     randomcol = true;
-                            //     discoController
-                            //         .add(homepagedisco = !homepagedisco);
-                            //     if (t1 != null && t1.isActive) {
-                            //       t1.cancel();
-                            //     } else {
-                            //       updateColors2();
-                            //     }
-                            //   },
-                            //   icon: Icon(
-                            //     FontAwesome.lightbulb_o,
-                            //     color: listcolor,
-                            //   ),
-                            // )
+                            IconButton(
+                              onPressed: () {
+                                if (disco2) {
+                                  disco2 = false;
+                                  t1.cancel();
+                                  discoController
+                                      .add(homepagedisco = !homepagedisco);
+                                }
+                                randomcol = false;
+                                disco = !disco;
+                                discoController
+                                    .add(homepagedisco = !homepagedisco);
+                                if (t != null && t.isActive) {
+                                  t.cancel();
+                                } else {
+                                  updateColors();
+                                }
+                              },
+                              icon: Icon(
+                                Icons.lightbulb_outline,
+                                color: listcolor,
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                if (disco) {
+                                  disco = false;
+                                  t.cancel();
+                                  discoController
+                                      .add(homepagedisco = !homepagedisco);
+                                }
+                                disco2 = !disco2;
+                                randomcol = true;
+                                discoController
+                                    .add(homepagedisco = !homepagedisco);
+                                if (t1 != null && t1.isActive) {
+                                  t1.cancel();
+                                } else {
+                                  updateColors2();
+                                }
+                              },
+                              icon: Icon(
+                                FontAwesome.lightbulb_o,
+                                color: listcolor,
+                              ),
+                            ),
                           ],
                         ),
                       );

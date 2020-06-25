@@ -138,7 +138,9 @@ class _SongListState extends State<SongList> {
                           style: TextStyle(
                             fontSize: 35.0,
                             fontWeight: FontWeight.bold,
-                            color: Color.fromRGBO(r, g, b, o > 0.7 ? o : 0.7),
+                            color: disco
+                                ? Color.fromRGBO(r, g, b, o > 0.7 ? o : 0.7)
+                                : defcolor,
                           ),
                         ),
                       );

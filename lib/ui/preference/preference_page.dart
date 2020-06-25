@@ -1,10 +1,6 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:pseudomusic/ui/global/disco/bloc/discobloc.dart';
-import 'package:pseudomusic/ui/global/theme/bloc/bloc.dart';
 import 'package:pseudomusic/utils/constants.dart';
 import 'package:pseudomusic/utils/variables.dart';
 import 'package:pseudomusic/widgets/colorpicker.dart';
@@ -15,6 +11,8 @@ class PreferencePage extends StatefulWidget {
 }
 
 class _PreferencePageState extends State<PreferencePage> {
+  Color color;
+
   @override
   void initState() {
     super.initState();
@@ -23,21 +21,26 @@ class _PreferencePageState extends State<PreferencePage> {
 
   @override
   Widget build(BuildContext context) {
+    color = Theme.of(context).primaryColor;
     return Scaffold(
       body: ListView(
         children: [
           ListTile(
-            leading: Icon(MaterialCommunityIcons.palette),
+            dense: true,
+            leading: Icon(
+              MaterialCommunityIcons.palette,
+              size: 20.0,
+              color: color,
+            ),
             title: Text(
               'Accent Color',
-              textAlign: TextAlign.left,
               style: TextStyle(
-                fontSize: 13.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
           ListTile(
+            contentPadding: EdgeInsets.only(left: 70.0),
             title: Text('Color'),
             onTap: () => showDialog(
               context: context,
@@ -53,17 +56,21 @@ class _PreferencePageState extends State<PreferencePage> {
             ),
           ),
           ListTile(
-            leading: Icon(MaterialCommunityIcons.navigation),
+            dense: true,
+            leading: Icon(
+              MaterialCommunityIcons.navigation,
+              color: color,
+              size: 20.0,
+            ),
             title: Text(
               'Navigation',
-              textAlign: TextAlign.left,
               style: TextStyle(
-                fontSize: 13.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
           RadioListTile<NavBarPrefs>(
+            activeColor: color,
             title: const Text('Bottom Drawer'),
             value: NavBarPrefs.bottom,
             groupValue: navpref,
@@ -76,6 +83,7 @@ class _PreferencePageState extends State<PreferencePage> {
             },
           ),
           RadioListTile<NavBarPrefs>(
+            activeColor: color,
             title: const Text('Tabs'),
             value: NavBarPrefs.tab,
             groupValue: navpref,
@@ -89,6 +97,7 @@ class _PreferencePageState extends State<PreferencePage> {
             },
           ),
           RadioListTile<NavBarPrefs>(
+            activeColor: color,
             title: const Text('Navigation Rails'),
             value: NavBarPrefs.rails,
             groupValue: navpref,
@@ -108,7 +117,11 @@ class _PreferencePageState extends State<PreferencePage> {
             ),
           ),
           ListTile(
-            leading: Icon(MaterialCommunityIcons.lightbulb),
+            leading: Icon(
+              MaterialCommunityIcons.lightbulb,
+              size: 20.0,
+              color: color,
+            ),
             title: Text(
               'Disco',
               textAlign: TextAlign.left,

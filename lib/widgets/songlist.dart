@@ -2,9 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:lottie/lottie.dart';
-import 'package:pseudomusic/ui/global/disco/bloc/discobloc.dart';
 import 'package:pseudomusic/utils/constants.dart';
 import 'package:pseudomusic/utils/variables.dart';
 

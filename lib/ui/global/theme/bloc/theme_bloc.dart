@@ -1,12 +1,17 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import '../app_themes.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import './bloc.dart';
 
 class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   @override
-  ThemeState get initialState =>
-      ThemeState(themeData: appThemeData[AppTheme.GreenLight]);
+  ThemeState get initialState => ThemeState(
+        themeData: ThemeData(
+          primaryColor: Colors.blue,
+          brightness: SchedulerBinding.instance.window.platformBrightness,
+        ),
+      );
 
   @override
   Stream<ThemeState> mapEventToState(

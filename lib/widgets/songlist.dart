@@ -24,7 +24,7 @@ class _SongListState extends State<SongList> {
   int b;
   double o;
   Timer t, t1;
-  Color listcolor;
+  Color defcolor;
 
   getColors() {
     r = ur = Random().nextInt(255);
@@ -73,8 +73,7 @@ class _SongListState extends State<SongList> {
 
   discoCtrl() {
     listdiscoController.stream.listen((event) {
-      print(event);
-      if (disco && discomode == DiscoModes.unison) {
+      if (discomode == DiscoModes.unison) {
         if (disco2) {
           disco2 = false;
           t1.cancel();
@@ -88,7 +87,7 @@ class _SongListState extends State<SongList> {
         } else {
           updateColors();
         }
-      } else if (disco && discomode == DiscoModes.random) {
+      } else if (discomode == DiscoModes.random) {
         if (disco1) {
           disco1 = false;
           t.cancel();
@@ -116,7 +115,7 @@ class _SongListState extends State<SongList> {
 
   @override
   Widget build(BuildContext context) {
-    listcolor = Theme.of(context).primaryColor;
+    defcolor = Theme.of(context).primaryColor;
     return Stack(
       children: [
         FutureBuilder(
@@ -136,67 +135,13 @@ class _SongListState extends State<SongList> {
                       return Container(
                         padding: EdgeInsets.only(left: 30.0, top: 40.0),
                         height: 120.0,
-                        child: Row(
-                          children: [
-                            Text(
-                              'All Songs',
-                              style: TextStyle(
-                                fontSize: 35.0,
-                                fontWeight: FontWeight.bold,
-                                color:
-                                    Color.fromRGBO(r, g, b, o > 0.7 ? o : 0.7),
-                              ),
-                            ),
-                            SizedBox(width: 10),
-                            IconButton(
-                              onPressed: () {
-                                if (disco2) {
-                                  disco2 = false;
-                                  t1.cancel();
-                                  discoController
-                                      .add(homepagedisco = !homepagedisco);
-                                }
-                                randomcol = false;
-                                disco1 = !disco1;
-                                discoController
-                                    .add(homepagedisco = !homepagedisco);
-                                if (t != null && t.isActive) {
-                                  t.cancel();
-                                } else {
-                                  updateColors();
-                                }
-                              },
-                              icon: Icon(
-                                Icons.lightbulb_outline,
-                                color:
-                                    Color.fromRGBO(r, g, b, o > 0.7 ? o : 0.7),
-                              ),
-                            ),
-                            IconButton(
-                              onPressed: () {
-                                if (disco1) {
-                                  disco1 = false;
-                                  t.cancel();
-                                  discoController
-                                      .add(homepagedisco = !homepagedisco);
-                                }
-                                disco2 = !disco2;
-                                randomcol = true;
-                                discoController
-                                    .add(homepagedisco = !homepagedisco);
-                                if (t1 != null && t1.isActive) {
-                                  t1.cancel();
-                                } else {
-                                  updateColors2();
-                                }
-                              },
-                              icon: Icon(
-                                FontAwesome.lightbulb_o,
-                                color:
-                                    Color.fromRGBO(r, g, b, o > 0.7 ? o : 0.7),
-                              ),
-                            )
-                          ],
+                        child: Text(
+                          'All Songs',
+                          style: TextStyle(
+                            fontSize: 35.0,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromRGBO(r, g, b, o > 0.7 ? o : 0.7),
+                          ),
                         ),
                       );
                     } else {
@@ -208,7 +153,7 @@ class _SongListState extends State<SongList> {
                         focusColor: Colors.blueAccent,
                         hoverColor: Colors.blueAccent,
                         leading: CircleAvatar(
-                          backgroundColor: color,
+                          backgroundColor: disco ? color : defcolor,
                           child: snapshot.data[index - 1].albumArtwork != null
                               ? Image.file(
                                   snapshot.data[index - 1].albumArtwork)
@@ -260,7 +205,7 @@ class _SongListState extends State<SongList> {
             },
             mini: true,
             backgroundColor:
-                disco ? Color.fromRGBO(r, g, b, o > 0.7 ? o : 0.7) : listcolor,
+                disco ? Color.fromRGBO(r, g, b, o > 0.7 ? o : 0.7) : defcolor,
             child: Icon(
               Icons.search,
               size: 20.0,

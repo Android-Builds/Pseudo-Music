@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:lottie/lottie.dart';
+import 'package:pseudomusic/ui/global/disco/bloc/discobloc.dart';
+import 'package:pseudomusic/utils/constants.dart';
 import 'package:pseudomusic/utils/variables.dart';
 
 class SongList extends StatefulWidget {
@@ -61,7 +63,7 @@ class _SongListState extends State<SongList> {
   }
 
   checkParams() {
-    if (disco) {
+    if (disco1) {
       updateColors();
     }
     if (disco2) {
@@ -71,18 +73,35 @@ class _SongListState extends State<SongList> {
 
   discoCtrl() {
     listdiscoController.stream.listen((event) {
-      if (disco2) {
-        disco2 = false;
-        t1.cancel();
+      print(event);
+      if (disco && discomode == DiscoModes.unison) {
+        if (disco2) {
+          disco2 = false;
+          t1.cancel();
+          discoController.add(homepagedisco = !homepagedisco);
+        }
+        randomcol = false;
+        disco1 = !disco1;
         discoController.add(homepagedisco = !homepagedisco);
-      }
-      randomcol = false;
-      disco = !disco;
-      discoController.add(homepagedisco = !homepagedisco);
-      if (t != null && t.isActive) {
-        t.cancel();
-      } else {
-        updateColors();
+        if (t != null && t.isActive) {
+          t.cancel();
+        } else {
+          updateColors();
+        }
+      } else if (disco && discomode == DiscoModes.random) {
+        if (disco1) {
+          disco1 = false;
+          t.cancel();
+          discoController.add(homepagedisco = !homepagedisco);
+        }
+        disco2 = !disco2;
+        randomcol = true;
+        discoController.add(homepagedisco = !homepagedisco);
+        if (t1 != null && t1.isActive) {
+          t1.cancel();
+        } else {
+          updateColors2();
+        }
       }
     });
   }
@@ -91,14 +110,13 @@ class _SongListState extends State<SongList> {
   void initState() {
     super.initState();
     getColors();
+    discoCtrl();
     checkParams();
   }
 
   @override
   Widget build(BuildContext context) {
-    listcolor = disco || disco2
-        ? Color.fromRGBO(r, g, b, o > 0.7 ? o : 0.7)
-        : Theme.of(context).primaryColor;
+    listcolor = Theme.of(context).primaryColor;
     return Stack(
       children: [
         FutureBuilder(
@@ -125,7 +143,8 @@ class _SongListState extends State<SongList> {
                               style: TextStyle(
                                 fontSize: 35.0,
                                 fontWeight: FontWeight.bold,
-                                color: listcolor,
+                                color:
+                                    Color.fromRGBO(r, g, b, o > 0.7 ? o : 0.7),
                               ),
                             ),
                             SizedBox(width: 10),
@@ -138,7 +157,7 @@ class _SongListState extends State<SongList> {
                                       .add(homepagedisco = !homepagedisco);
                                 }
                                 randomcol = false;
-                                disco = !disco;
+                                disco1 = !disco1;
                                 discoController
                                     .add(homepagedisco = !homepagedisco);
                                 if (t != null && t.isActive) {
@@ -149,13 +168,14 @@ class _SongListState extends State<SongList> {
                               },
                               icon: Icon(
                                 Icons.lightbulb_outline,
-                                color: listcolor,
+                                color:
+                                    Color.fromRGBO(r, g, b, o > 0.7 ? o : 0.7),
                               ),
                             ),
                             IconButton(
                               onPressed: () {
-                                if (disco) {
-                                  disco = false;
+                                if (disco1) {
+                                  disco1 = false;
                                   t.cancel();
                                   discoController
                                       .add(homepagedisco = !homepagedisco);
@@ -172,18 +192,17 @@ class _SongListState extends State<SongList> {
                               },
                               icon: Icon(
                                 FontAwesome.lightbulb_o,
-                                color: listcolor,
+                                color:
+                                    Color.fromRGBO(r, g, b, o > 0.7 ? o : 0.7),
                               ),
-                            ),
+                            )
                           ],
                         ),
                       );
                     } else {
-                      Color color = listcolor;
+                      Color color = Color.fromRGBO(r, g, b, o > 0.7 ? o : 0.7);
                       if (darkmode && color.computeLuminance() < 0.5) {
-                        color = disco || disco2
-                            ? Color.fromRGBO(r, g, b, 0.7)
-                            : Theme.of(context).primaryColor;
+                        color = Color.fromRGBO(r, g, b, 0.7);
                       }
                       return ListTile(
                         focusColor: Colors.blueAccent,
@@ -240,7 +259,8 @@ class _SongListState extends State<SongList> {
               });
             },
             mini: true,
-            backgroundColor: Color.fromRGBO(r, g, b, o > 0.7 ? o : 0.7),
+            backgroundColor:
+                disco ? Color.fromRGBO(r, g, b, o > 0.7 ? o : 0.7) : listcolor,
             child: Icon(
               Icons.search,
               size: 20.0,

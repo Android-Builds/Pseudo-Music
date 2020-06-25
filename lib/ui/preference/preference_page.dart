@@ -124,7 +124,7 @@ class _PreferencePageState extends State<PreferencePage> {
             onChanged: (value) {
               setState(() {
                 disco = value;
-                listdiscoController.add(disco1 = !disco1);
+                listdiscoController.add(discomode);
               });
             },
           ),
@@ -136,6 +136,7 @@ class _PreferencePageState extends State<PreferencePage> {
                 ? (DiscoModes value) {
                     setState(() {
                       discomode = value;
+                      listdiscoController.add(discomode);
                     });
                   }
                 : null,
@@ -148,6 +149,7 @@ class _PreferencePageState extends State<PreferencePage> {
                 ? (DiscoModes value) {
                     setState(() {
                       discomode = value;
+                      listdiscoController.add(discomode);
                     });
                   }
                 : null,

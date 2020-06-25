@@ -24,6 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
     //  songModel2 = new SongModel();
     getuColors();
     fetchSongs();
+    listdiscoController = new StreamController();
     Timer(Duration(seconds: 2), () {
       Route route = MaterialPageRoute(builder: (context) => HomePage2());
       Navigator.pushReplacement(context, route);

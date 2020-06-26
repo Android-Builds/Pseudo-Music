@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:pseudomusic/ui/home/homepage.dart';
+import 'package:pseudomusic/utils/constants.dart';
 import 'package:pseudomusic/utils/variables.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -25,7 +26,6 @@ class _SplashScreenState extends State<SplashScreen> {
     getuColors();
     fetchSongs();
 
-    //TODO: remove this
     listdiscoController = new StreamController();
 
     Timer(Duration(seconds: 2), () {

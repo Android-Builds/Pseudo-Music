@@ -9,6 +9,10 @@ int g, ug;
 int b, ub;
 double o, uo;
 
+Color uicolor;
+
+TabController tabController;
+
 Brightness brightness;
 Color currentColor = Colors.limeAccent;
 NavBarPrefs navpref = NavBarPrefs.bottom;

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:pseudomusic/utils/constants.dart';
@@ -29,25 +28,6 @@ bool randomcol = false;
 bool darkmode = false;
 bool homepagedisco = false;
 
-bool usenavrails = false;
-bool usetabbar = false;
-
 StreamController discoController;
-StreamController uiController;
 
 StreamController listdiscoController;
-
-getColor(BuildContext context) {
-  var brightness = MediaQuery.of(context).platformBrightness;
-  if (brightness == Brightness.dark)
-    return Colors.white;
-  else
-    return Colors.black;
-}
-
-getuColors() {
-  ur = Random().nextInt(255);
-  ug = Random().nextInt(255);
-  ub = Random().nextInt(255);
-  uo = Random().nextDouble();
-}

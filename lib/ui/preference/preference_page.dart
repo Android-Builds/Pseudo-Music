@@ -1,6 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:pseudomusic/ui/global/navigation/bloc/navigation_bloc.dart';
+import 'package:pseudomusic/ui/global/navigation/navigation.dart';
+import 'package:pseudomusic/ui/global/theme/bloc/theme_bloc.dart';
 import 'package:pseudomusic/utils/constants.dart';
 import 'package:pseudomusic/utils/variables.dart';
 import 'package:pseudomusic/widgets/colorpicker.dart';
@@ -77,8 +81,11 @@ class _SettingsPageState extends State<SettingsPage> {
             onChanged: (NavBarPrefs value) {
               setState(() {
                 navpref = value;
-                uiController.add(usetabbar = false);
-                uiController.add(usenavrails = false);
+                BlocProvider.of<NavigationBloc>(context).add(
+                  NavigationChanged(
+                    homeWidget: homeWidget[Navigation.Navbar],
+                  ),
+                );
               });
             },
           ),
@@ -90,9 +97,11 @@ class _SettingsPageState extends State<SettingsPage> {
             onChanged: (NavBarPrefs value) {
               setState(() {
                 navpref = value;
-                uiController.add(usenavrails = false);
-                uiController.add(usetabbar = true);
-                print(usetabbar);
+                BlocProvider.of<NavigationBloc>(context).add(
+                  NavigationChanged(
+                    homeWidget: homeWidget[Navigation.Tabbar],
+                  ),
+                );
               });
             },
           ),
@@ -104,9 +113,11 @@ class _SettingsPageState extends State<SettingsPage> {
             onChanged: (NavBarPrefs value) {
               setState(() {
                 navpref = value;
-                uiController.add(usetabbar = false);
-                uiController.add(usenavrails = true);
-                print(usenavrails);
+                BlocProvider.of<NavigationBloc>(context).add(
+                  NavigationChanged(
+                    homeWidget: homeWidget[Navigation.NavigationRails],
+                  ),
+                );
               });
             },
           ),

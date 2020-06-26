@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:pseudomusic/ui/global/navigation/bloc/navigation_bloc.dart';
 import 'package:pseudomusic/ui/preference/preference_page.dart';
 import 'package:pseudomusic/utils/variables.dart';

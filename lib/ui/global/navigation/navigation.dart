@@ -39,6 +39,9 @@ class _NavViewState extends State<NavView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: _widgetOptions.elementAt(
+        _selectedIndex,
+      ),
       bottomNavigationBar: BottomNavigationBar(
         elevation: 0.0,
         items: <BottomNavigationBarItem>[

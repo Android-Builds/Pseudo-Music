@@ -14,19 +14,7 @@ class HomePage2 extends StatefulWidget {
 
 class _HomePage2State extends State<HomePage2>
     with SingleTickerProviderStateMixin {
-  int _selectedIndex = 0;
   Timer t;
-
-  List<Widget> _widgetOptions = <Widget>[
-    Container(
-      child: SongList(),
-    ),
-    Container(),
-    Container(
-      child: Text('Hello'),
-    ),
-    SettingsPage(),
-  ];
 
   updateColors2() {
     t = Timer.periodic(const Duration(milliseconds: 500), (Timer t) {
@@ -38,17 +26,10 @@ class _HomePage2State extends State<HomePage2>
     });
   }
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   void initState() {
     super.initState();
     tabController = TabController(length: 3, vsync: this);
     discoController = new StreamController();
-    uiController = new StreamController();
     discoController.stream.listen((event) {
       if (event) {
         updateColors2();

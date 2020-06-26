@@ -1,10 +1,11 @@
 part of 'navigation_bloc.dart';
 
-abstract class NavigationState extends Equatable {
-  const NavigationState();
-}
+@immutable
+class NavigationState extends Equatable {
+  final Widget homeWidget;
 
-class NavigationInitial extends NavigationState {
+  NavigationState({@required this.homeWidget}) : super();
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [homeWidget];
 }

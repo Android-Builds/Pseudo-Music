@@ -73,7 +73,9 @@ class _HomePage2State extends State<HomePage2>
       create: (context) => NavigationBloc(),
       child: BlocBuilder<NavigationBloc, NavigationState>(
           builder: (BuildContext context, NavigationState state) {
-        return SafeArea();
+        return SafeArea(
+          child: state.homeWidget,
+        );
       }),
     );
   }

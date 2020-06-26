@@ -176,9 +176,9 @@ class _RailsViewState extends State<RailsView> {
 
 final homeWidget = {
   //
-  Navigation.Navbar: NavView,
+  Navigation.Navbar: NavView(),
   //
-  Navigation.Tabbar: TabView,
+  Navigation.Tabbar: TabView(),
   //
-  Navigation.NavigationRails: RailsView,
+  Navigation.NavigationRails: RailsView(),
 };

@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
             onPressed: () {
               // Navigate to the PreferencePage
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => PreferencePage(),
+                builder: (context) => SettingsPage(),
               ));
             },
           )

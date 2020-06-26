@@ -5,12 +5,12 @@ import 'package:pseudomusic/utils/constants.dart';
 import 'package:pseudomusic/utils/variables.dart';
 import 'package:pseudomusic/widgets/colorpicker.dart';
 
-class PreferencePage extends StatefulWidget {
+class SettingsPage extends StatefulWidget {
   @override
-  _PreferencePageState createState() => _PreferencePageState();
+  _SettingsPageState createState() => _SettingsPageState();
 }
 
-class _PreferencePageState extends State<PreferencePage> {
+class _SettingsPageState extends State<SettingsPage> {
   Color color;
 
   @override

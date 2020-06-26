@@ -19,7 +19,7 @@ List<Widget> _widgetOptions = <Widget>[
   Container(
     child: Text('Hello'),
   ),
-  PreferencePage(),
+  SettingsPage(),
 ];
 
 class NavView extends StatefulWidget {
@@ -106,7 +106,7 @@ class _TabViewState extends State<TabView> {
           Container(
             child: Text('Hello'),
           ),
-          PreferencePage(),
+          SettingsPage(),
         ],
         controller: tabController,
       ),

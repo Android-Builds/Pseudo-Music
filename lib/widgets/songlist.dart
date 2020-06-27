@@ -69,36 +69,56 @@ class _SongListState extends State<SongList> {
     }
   }
 
+  controlmodes() {
+    if (discomode == DiscoModes.unison) {
+      controlinison();
+    } else if (discomode == DiscoModes.random) {
+      controlrandom();
+    }
+  }
+
+  controlinison() {
+    if (disco2) {
+      disco2 = false;
+      t1.cancel();
+      discoController.add(homepagedisco = !homepagedisco);
+    }
+    randomcol = false;
+    disco1 = !disco1;
+    discoController.add(homepagedisco = !homepagedisco);
+    if (t != null && t.isActive) {
+      t.cancel();
+    } else {
+      updateColors();
+    }
+  }
+
+  controlrandom() {
+    if (disco1) {
+      disco1 = false;
+      t.cancel();
+      discoController.add(homepagedisco = !homepagedisco);
+    }
+    disco2 = !disco2;
+    randomcol = true;
+    discoController.add(homepagedisco = !homepagedisco);
+    if (t1 != null && t1.isActive) {
+      t1.cancel();
+    } else {
+      updateColors2();
+    }
+  }
+
   discoCtrl() {
     listdiscoController.stream.listen((event) {
-      if (discomode == DiscoModes.unison) {
-        if (disco2) {
-          disco2 = false;
-          t1.cancel();
-          discoController.add(homepagedisco = !homepagedisco);
-        }
-        randomcol = false;
-        disco1 = !disco1;
-        discoController.add(homepagedisco = !homepagedisco);
-        if (t != null && t.isActive) {
-          t.cancel();
-        } else {
-          updateColors();
-        }
-      } else if (discomode == DiscoModes.random) {
-        if (disco1) {
-          disco1 = false;
-          t.cancel();
-          discoController.add(homepagedisco = !homepagedisco);
-        }
-        disco2 = !disco2;
-        randomcol = true;
-        discoController.add(homepagedisco = !homepagedisco);
-        if (t1 != null && t1.isActive) {
+      if (modeStatus == DiscoModeStatus.onplay) {
+        if (!playing && t1 != null && t1.isActive) {
           t1.cancel();
         } else {
-          updateColors2();
+          controlmodes();
         }
+      } else if (modeStatus == DiscoModeStatus.always && event == true) {
+        controlmodes();
       }
     });
   }
@@ -152,6 +172,16 @@ class _SongListState extends State<SongList> {
                       return ListTile(
                         focusColor: Colors.blueAccent,
                         hoverColor: Colors.blueAccent,
+                        onTap: () {
+                          setState(() {
+                            playing = !playing;
+                            Scaffold.of(context).removeCurrentSnackBar();
+                            Scaffold.of(context).showSnackBar(new SnackBar(
+                                content:
+                                    Text('Playings: ' + playing.toString())));
+                            listdiscoController.add(false);
+                          });
+                        },
                         leading: CircleAvatar(
                           backgroundColor: disco ? color : defcolor,
                           child: snapshot.data[index - 1].albumArtwork != null

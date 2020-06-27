@@ -149,7 +149,7 @@ class _SettingsPageState extends State<SettingsPage> {
             onChanged: (value) {
               setState(() {
                 disco = value;
-                listdiscoController.add(discomode);
+                listdiscoController.add(true);
               });
             },
           ),
@@ -162,7 +162,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 ? (DiscoModes value) {
                     setState(() {
                       discomode = value;
-                      listdiscoController.add(discomode);
+                      listdiscoController.add(true);
                     });
                   }
                 : null,
@@ -176,7 +176,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 ? (DiscoModes value) {
                     setState(() {
                       discomode = value;
-                      listdiscoController.add(discomode);
+                      listdiscoController.add(true);
                     });
                   }
                 : null,

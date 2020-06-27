@@ -28,6 +28,8 @@ bool randomcol = false;
 bool darkmode = false;
 bool homepagedisco = false;
 
+bool playing = false;
+
 StreamController discoController;
 
 StreamController listdiscoController;

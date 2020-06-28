@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:pseudomusic/ui/global/navigation/bloc/navigation_bloc.dart';
 import 'package:pseudomusic/ui/global/navigation/navigation.dart';
-import 'package:pseudomusic/ui/global/theme/bloc/theme_bloc.dart';
 import 'package:pseudomusic/utils/constants.dart';
 import 'package:pseudomusic/utils/variables.dart';
 import 'package:pseudomusic/widgets/colorpicker.dart';
@@ -20,7 +19,6 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   void initState() {
     super.initState();
-    listdiscoController = new StreamController();
   }
 
   @override

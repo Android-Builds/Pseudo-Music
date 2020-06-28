@@ -27,6 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
     fetchSongs();
 
     listdiscoController = new StreamController();
+    discoController = new StreamController();
 
     Timer(Duration(seconds: 2), () {
       Route route = MaterialPageRoute(builder: (context) => HomePage2());

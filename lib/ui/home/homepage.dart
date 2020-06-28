@@ -14,7 +14,7 @@ class _HomePage2State extends State<HomePage2>
     with SingleTickerProviderStateMixin {
   Timer t;
 
-  updateColors2() {
+  updateColors() {
     t = Timer.periodic(const Duration(milliseconds: 500), (Timer t) {
       setState(() {
         r = ur = Random().nextInt(255);
@@ -24,19 +24,29 @@ class _HomePage2State extends State<HomePage2>
     });
   }
 
-  void initState() {
-    super.initState();
-    tabController = TabController(length: 3, vsync: this);
-    discoController = new StreamController();
+  checkParams() {
+    if (homepagedisco) {
+      updateColors();
+    }
+  }
+
+  discoCtrl() {
     discoController.stream.listen((event) {
       if (event) {
-        updateColors2();
+        updateColors();
       } else if (t != null && t.isActive) {
         t.cancel();
       } else {
         setState(() {});
       }
     });
+  }
+
+  void initState() {
+    super.initState();
+    tabController = TabController(length: 3, vsync: this);
+    discoCtrl();
+    //checkParams();
   }
 
   @override

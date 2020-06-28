@@ -11,9 +11,6 @@ class SongList extends StatefulWidget {
   _SongListState createState() => _SongListState();
 }
 
-StreamSubscription periodicSub;
-StreamSubscription periodicSub2;
-
 class _SongListState extends State<SongList> {
   List<SongInfo> songlist = new List<SongInfo>();
   bool showsSearchBar = false;
@@ -58,6 +55,7 @@ class _SongListState extends State<SongList> {
     if (t1 != null && t1.isActive) {
       t1.cancel();
     }
+    listdiscoController = new StreamController();
   }
 
   checkParams() {

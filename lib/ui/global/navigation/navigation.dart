@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:pseudomusic/ui/global/theme/bloc/bloc.dart';
 import 'package:pseudomusic/ui/preference/preference_page.dart';
 import 'package:pseudomusic/utils/variables.dart';
 import 'package:pseudomusic/widgets/songlist.dart';
@@ -10,6 +11,8 @@ enum Navigation {
   Navbar,
   NavigationRails,
 }
+
+ThemeBloc themeBloc;
 
 List<Widget> _widgetOptions = <Widget>[
   Container(
@@ -33,6 +36,20 @@ class _NavViewState extends State<NavView> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    print('here');
+    themeBloc = new ThemeBloc();
+    themeBloc.listen((changed) {
+      if (changed is ThemeChanged) {
+        setState(() {
+          print('updated');
+        });
+      }
     });
   }
 
@@ -77,6 +94,17 @@ class TabView extends StatefulWidget {
 }
 
 class _TabViewState extends State<TabView> {
+  @override
+  void initState() {
+    super.initState();
+    themeBloc = new ThemeBloc();
+    themeBloc.listen((changed) {
+      if (changed is ThemeChanged) {
+        setState(() {});
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -125,6 +153,17 @@ class _RailsViewState extends State<RailsView> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    themeBloc = new ThemeBloc();
+    themeBloc.listen((changed) {
+      if (changed is ThemeChanged) {
+        setState(() {});
+      }
     });
   }
 

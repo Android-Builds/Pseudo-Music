@@ -1,9 +1,5 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:pseudomusic/ui/global/navigation/bloc/navigation_bloc.dart';
-import 'package:pseudomusic/ui/global/navigation/navigation.dart';
 import 'package:pseudomusic/utils/constants.dart';
 import 'package:pseudomusic/utils/variables.dart';
 import 'package:pseudomusic/widgets/colorpicker.dart';
@@ -50,74 +46,6 @@ class _SettingsPageState extends State<SettingsPage> {
                 return ColorPickerDialog();
               },
             ),
-          ),
-          SizedBox(
-            width: 200.0,
-            child: Divider(
-              thickness: 1.2,
-            ),
-          ),
-          ListTile(
-            dense: true,
-            leading: Icon(
-              MaterialCommunityIcons.navigation,
-              color: color,
-              size: 20.0,
-            ),
-            title: Text(
-              'Navigation',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          RadioListTile<NavBarPrefs>(
-            activeColor: color,
-            title: const Text('Bottom Drawer'),
-            value: NavBarPrefs.bottom,
-            groupValue: navpref,
-            onChanged: (NavBarPrefs value) {
-              setState(() {
-                navpref = value;
-                BlocProvider.of<NavigationBloc>(context).add(
-                  NavigationChanged(
-                    homeWidget: homeWidget[Navigation.Navbar],
-                  ),
-                );
-              });
-            },
-          ),
-          RadioListTile<NavBarPrefs>(
-            activeColor: color,
-            title: const Text('Tabs'),
-            value: NavBarPrefs.tab,
-            groupValue: navpref,
-            onChanged: (NavBarPrefs value) {
-              setState(() {
-                navpref = value;
-                BlocProvider.of<NavigationBloc>(context).add(
-                  NavigationChanged(
-                    homeWidget: homeWidget[Navigation.Tabbar],
-                  ),
-                );
-              });
-            },
-          ),
-          RadioListTile<NavBarPrefs>(
-            activeColor: color,
-            title: const Text('Navigation Rails'),
-            value: NavBarPrefs.rails,
-            groupValue: navpref,
-            onChanged: (NavBarPrefs value) {
-              setState(() {
-                navpref = value;
-                BlocProvider.of<NavigationBloc>(context).add(
-                  NavigationChanged(
-                    homeWidget: homeWidget[Navigation.NavigationRails],
-                  ),
-                );
-              });
-            },
           ),
           SizedBox(
             width: 200.0,

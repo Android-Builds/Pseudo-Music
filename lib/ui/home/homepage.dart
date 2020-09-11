@@ -1,11 +1,10 @@
 import 'dart:async';
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pseudomusic/ui/global/navigation/bloc/navigation_bloc.dart';
-import 'package:pseudomusic/ui/global/navigation/navigation.dart';
 import 'package:pseudomusic/ui/global/theme/bloc/bloc.dart';
+import 'package:pseudomusic/ui/preference/preference_page.dart';
 import 'package:pseudomusic/utils/variables.dart';
+import 'package:pseudomusic/widgets/songlist.dart';
 
 class HomePage2 extends StatefulWidget {
   @override
@@ -15,6 +14,13 @@ class HomePage2 extends StatefulWidget {
 class _HomePage2State extends State<HomePage2>
     with SingleTickerProviderStateMixin {
   Timer t;
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   updateColors() {
     t = Timer.periodic(const Duration(milliseconds: 500), (Timer t) {
@@ -51,42 +57,59 @@ class _HomePage2State extends State<HomePage2>
     checkParams();
   }
 
-  NavigationBloc _navigationBloc = NavigationBloc();
-
-  @override
-  void dispose() {
-    _navigationBloc.close();
-    super.dispose();
-  }
+  List<Widget> _widgetOptions = <Widget>[
+    Container(
+      child: SongList(),
+    ),
+    Container(),
+    Container(
+      child: Text('Hello'),
+    ),
+    SettingsPage(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     uicolor =
         disco ? Color.fromRGBO(ur, ug, ub, 1) : Theme.of(context).primaryColor;
     return BlocProvider(
-        create: (context) => NavigationBloc(),
-        child: BlocListener<ThemeBloc, ThemeState>(
-          bloc: ThemeBloc(),
-          listener: (context, state) {
-            if (state is ThemeChanged) {
-              _navigationBloc.add(
-                  NavigationChanged(homeWidget: homeWidget[Navigation.Navbar]));
-            }
-          },
-          child: BlocBuilder<NavigationBloc, NavigationState>(
-              builder: (BuildContext context, NavigationState state) {
-            return SafeArea(
-              child: state.homeWidget,
-            );
-          }),
-        )
-
-        // child: BlocBuilder<NavigationBloc, NavigationState>(
-        //     builder: (BuildContext context, NavigationState state) {
-        //   return SafeArea(
-        //     child: state.homeWidget,
-        //   );
-        // }),
-        );
+      create: (context) => ThemeBloc(),
+      child: BlocBuilder<ThemeBloc, ThemeState>(
+        builder: (BuildContext context, ThemeState state) {
+          return SafeArea(
+            child: Scaffold(
+              body: _widgetOptions.elementAt(
+                _selectedIndex,
+              ),
+              bottomNavigationBar: BottomNavigationBar(
+                elevation: 0.0,
+                items: <BottomNavigationBarItem>[
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.music_note),
+                    title: Text('Songs'),
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.playlist_play),
+                    title: Text('Playlist'),
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.album),
+                    title: Text('Albums'),
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.settings),
+                    title: Text('Settings'),
+                  ),
+                ],
+                currentIndex: _selectedIndex,
+                unselectedItemColor: Colors.grey,
+                selectedItemColor: uicolor,
+                onTap: _onItemTapped,
+              ),
+            ),
+          );
+        },
+      ),
+    );
   }
 }
